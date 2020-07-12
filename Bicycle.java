@@ -41,6 +41,20 @@ class Gear {
     }
 }
 
+class FrontGear extends Gear {
+    // functionality specific to Front Gears like limitation of size, range.
+    FrontGear(double chainRingSize, double cogSize) {
+       super(chainRingSize, cogSize);
+    }
+}
+
+class BackGear extends Gear {
+    // functionality specific to Back Gears like limitation of size, range.
+    BackGear(double chainRingSize, double cogSize) {
+        super(chainRingSize, cogSize);
+    }
+} 
+
 class Rim implements DiametricObjects {
     private double diameter;
 
@@ -110,94 +124,113 @@ class Wheel implements DiametricObjects {
 }
 
 class Bicycle {
-    private Wheel wheel1;
-    private Wheel wheel2;
-    private Gear gear;
+    private Wheel frontWheel;
+    private Wheel backWheel;
+    private FrontGear frontGear;
+    private BackGear backGear;
 
     Bicycle(Hashtable bicycleHash) {
-        this.wheel1 = (Wheel)bicycleHash.get("wheel1");
-        this.wheel2 = (Wheel)bicycleHash.get("wheel2");
-        this.gear  = (Gear)bicycleHash.get("gear"); 
+        this.frontWheel = (Wheel)bicycleHash.get("frontWheel");
+        this.backWheel = (Wheel)bicycleHash.get("backWheel");
+        this.frontGear  = (FrontGear)bicycleHash.get("frontGear"); 
+        this.backGear  = (BackGear)bicycleHash.get("backGear"); 
     }
 
-    Wheel getWheel1() {
-        return this.wheel1;
+    Wheel getfrontWheel() {
+        return this.frontWheel;
     }
 
-    Wheel getWheel2() {
-        return this.wheel2;
+    Wheel getbackWheel() {
+        return this.backWheel;
     }
 
-    Gear getGear() {
-        return this.gear;
+    FrontGear getFrontGear() {
+        return this.frontGear;
     }
 
-    void modifyWheel1(Wheel newWheel1) {
-        this.wheel1 = newWheel1;
+    BackGear getBackGear() {
+        return this.backGear;
+    }
+
+    void modifyfrontWheel(Wheel newfrontWheel) {
+        this.frontWheel = newfrontWheel;
     }
 
 
-    void modifyWheel2(Wheel newWheel2) {
-        this.wheel2 = newWheel2;
+    void modifybackWheel(Wheel newbackWheel) {
+        this.backWheel = newbackWheel;
     }
 
-    void modifyGear(Gear newGear) {
-        this.gear = newGear;
+    void modifyFrontGear(FrontGear newFrontGear) {
+        this.frontGear = newFrontGear;
+    }
+
+    void modifyBackGear(BackGear newBackGear) {
+        this.backGear = newBackGear;
     }
 
     public static void main(String args[]) {
 
-        Gear gear = new Gear(21.3, 24.1);
+        Gear frontGear = new FrontGear(21.3, 24.1);
+        Gear backGear = new BackGear(21.3, 24.1);
         Tyre tyre = new Tyre(24.0);
         Rim rim = new Rim(23.0);
 
         Hashtable<String, Object> wheelHash1 = new Hashtable<String, Object>();
         wheelHash1.put("tyre", tyre);
         wheelHash1.put("rim", rim);
-        Wheel wheel1 = new Wheel(wheelHash1);
+        Wheel frontWheel = new Wheel(wheelHash1);
         Hashtable<String, Object> wheelHash2 = new Hashtable<String, Object>();
         wheelHash2.put("tyre", tyre);
         wheelHash2.put("rim", rim);
-        Wheel wheel2 = new Wheel(wheelHash2);
+        Wheel backWheel = new Wheel(wheelHash2);
 
         Hashtable<String, Object> bicycleHash = new Hashtable<String, Object>();
-        bicycleHash.put("wheel1", wheel1);
-        bicycleHash.put("wheel2", wheel2);
-        bicycleHash.put("gear", gear);
+        bicycleHash.put("frontWheel", frontWheel);
+        bicycleHash.put("backWheel", backWheel);
+        bicycleHash.put("frontGear", frontGear);
+        bicycleHash.put("backGear", backGear);
         Bicycle bicycle = new Bicycle(bicycleHash);
 
         System.out.println("Bicycle Features:");
 
-        System.out.println("    Wheel1 Features:");
+        System.out.println("    frontWheel Features:");
         System.out.println("        Tyre Features:");
-        System.out.println("            Size: " + bicycle.getWheel1().getTyre().getThickness());
+        System.out.println("            Size: " + bicycle.getfrontWheel().getTyre().getThickness());
         System.out.println("        Rim Features:");
-        System.out.println("            Size: " + bicycle.getWheel1().getRim().getDiameter());
+        System.out.println("            Size: " + bicycle.getfrontWheel().getRim().getDiameter());
         System.out.println("        Diameter:");
-        System.out.println("            Value: " + bicycle.getWheel1().getDiameter());
+        System.out.println("            Value: " + bicycle.getfrontWheel().getDiameter());
         System.out.println("        Circumference:");
-        System.out.println("            Value: " + bicycle.getWheel1().circumference());
+        System.out.println("            Value: " + bicycle.getfrontWheel().circumference());
         
-        System.out.println("    Wheel2 Features:");
+        System.out.println("    backWheel Features:");
         System.out.println("        Tyre Features:");
-        System.out.println("            Size: " + bicycle.getWheel2().getTyre().getThickness());
+        System.out.println("            Size: " + bicycle.getbackWheel().getTyre().getThickness());
         System.out.println("        Rim Features:");
-        System.out.println("            Size: " + bicycle.getWheel1().getRim().getDiameter());
+        System.out.println("            Size: " + bicycle.getfrontWheel().getRim().getDiameter());
         System.out.println("        Diameter:");
-        System.out.println("            Value: " + bicycle.getWheel2().getDiameter());
+        System.out.println("            Value: " + bicycle.getbackWheel().getDiameter());
         System.out.println("        Circumference:");
-        System.out.println("            Value: " + bicycle.getWheel2().circumference());
+        System.out.println("            Value: " + bicycle.getbackWheel().circumference());
         
         System.out.println("    Gear Features:");
-        System.out.println("        ChainRing:");
-        System.out.println("            Size: " + bicycle.getGear().getChainRingSize());
-        System.out.println("        Cog:");
-        System.out.println("            Size: " + bicycle.getGear().getCogSize());
+        System.out.println("        Front Gear(s):");
+        System.out.println("            ChainRing:");
+        System.out.println("                Size: " + bicycle.getFrontGear().getChainRingSize());
+        System.out.println("            Cog:");
+        System.out.println("                Size: " + bicycle.getFrontGear().getCogSize());
+
+        System.out.println("        Back Gear(s):");
+        System.out.println("            ChainRing:");
+        System.out.println("                Size: " + bicycle.getBackGear().getChainRingSize());
+        System.out.println("            Cog:");
+        System.out.println("                Size: " + bicycle.getBackGear().getCogSize());
 
         System.out.println("-----------------------------------------------");
         System.out.println("    Gear Ratio For the Wheel:");
-        System.out.println("            Value1: " + bicycle.getGear().gearInches(bicycle.getWheel1()));
-        System.out.println("            Value2: " + bicycle.getGear().gearInches(bicycle.getWheel2()));
+        System.out.println("            Value1: " + bicycle.getFrontGear().gearInches(bicycle.getfrontWheel()));
+        System.out.println("            Value2: " + bicycle.getFrontGear().gearInches(bicycle.getbackWheel()));
 
     }
 }
