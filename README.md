@@ -23,9 +23,9 @@ Further Additions to be done:
 2. Exception Handling.
 
 _____________________________________________________________________________________________________________________________
-COMPILE: javac Bicycle.java -d <dir-name> 
-Explanation: The .class file is stored in the dir named <dir-name>.
+COMPILE: javac Bicycle.java -d [dirname] 
+Explanation: The .class file is stored in the dir named [dir-name].
 
-RUN: java -cp ClassFiles <package-name>.Bicycle 
-Explanation: Part of package <package-name>.
+RUN: java -cp ClassFiles [package-name].Bicycle 
+Explanation: Part of package [package-name].
 _____________________________________________________________________________________________________________________________
