@@ -12,7 +12,22 @@ class Gear {
         this.chainRingSize = chainRingSize;
         this.cogSize = cogSize;
     }
+
+    double getChainRingSize() {
+        return this.chainRingSize;
+    }
+
+    double getCogSize() {
+        return this.cogSize;
+    }
+
+    void modifyChainRingSize(double newChainRingSize) {
+        this.chainRingSize = newChainRingSize;
+    }
     
+    void modifyCogSize(double newCogSize) {
+        this.cogSize = newCogSize;
+    }
 }
 
 class Rim {
@@ -22,6 +37,13 @@ class Rim {
         this.size = size;
     }
 
+    double getSize() {
+        return this.size;
+    }
+
+    void modifySize(double newSize) {
+        this.size = newSize;
+    }
 
 }
 
@@ -32,7 +54,13 @@ class Tyre {
         this.thickness = thickness;
     }
 
+    double getThickness() {
+        return this.thickness;
+    }
 
+    void modifySize(double newThickness) {
+        this.thickness = newThickness;
+    }
 }
 
 class Wheel {
@@ -42,6 +70,22 @@ class Wheel {
     Wheel(Hashtable wheelHash) {
         this.tyre = (Tyre)wheelHash.get("tyre");
         this.rim = (Rim)wheelHash.get("rim");
+    }
+
+    Tyre getTyre() {
+        return this.tyre;
+    }
+
+    Rim getRim() {
+        return this.rim;
+    }
+
+    void modifyTyre(Tyre newTyre) {
+        this.tyre = newTyre;
+    }
+
+    void modifyRim(Rim newRim) {
+        this.rim = newRim;
     }
 
 }
@@ -56,6 +100,32 @@ class Bicycle {
         this.wheel2 = (Wheel)bicycleHash.get("wheel2");
         this.gear  = (Gear)bicycleHash.get("gear"); 
     }
+
+    Wheel getWheel1() {
+        return this.wheel1;
+    }
+
+    Wheel getWheel2() {
+        return this.wheel2;
+    }
+
+    Gear getGear() {
+        return this.gear;
+    }
+
+    void modifyWheel1(Wheel newWheel1) {
+        this.wheel1 = newWheel1;
+    }
+
+
+    void modifyWheel2(Wheel newWheel2) {
+        this.wheel2 = newWheel2;
+    }
+
+    void modifyGear(Gear newGear) {
+        this.gear = newGear;
+    }
+
     public static void main(String args[]) {
 
         Gear gear = new Gear(21.3, 24.1);
@@ -76,6 +146,18 @@ class Bicycle {
         bicycleHash.put("wheel2", wheel2);
         bicycleHash.put("gear", gear);
         Bicycle bicycle = new Bicycle(bicycleHash);
+
+        System.out.println("Bicycle Features:");
+        System.out.println("    Wheel Features:");
+        System.out.println("        Tyre Features:");
+        System.out.println("            Size: " + bicycle.getWheel1().getTyre().getThickness());
+        System.out.println("        Rim Features:");
+        System.out.println("            Size: " + bicycle.getWheel1().getRim().getSize());
+        System.out.println("    Gear Features:");
+        System.out.println("        ChainRing:");
+        System.out.println("            Size: " + bicycle.getGear().getChainRingSize());
+        System.out.println("        Cog:");
+        System.out.println("            Size: " + bicycle.getGear().getCogSize());
     }
 }
 
