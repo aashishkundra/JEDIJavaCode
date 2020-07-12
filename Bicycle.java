@@ -30,7 +30,11 @@ class Gear {
     }
 
     double ratio() {
-        return chainRing / cog;
+        return chainRingSize / cogSize;
+    }
+
+    double gearInches(Wheel wheel) {
+        return this.ratio() * wheel.diameter();
     }
 }
 
@@ -93,7 +97,7 @@ class Wheel {
     }
 
     double diameter() {
-        return this.tyre.getSize() * 2 + this.rim.getSize();
+        return this.tyre.getThickness() * 2 + this.rim.getSize();
     }
 
     double circumference() {
