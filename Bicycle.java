@@ -164,11 +164,27 @@ class Bicycle {
         Bicycle bicycle = new Bicycle(bicycleHash);
 
         System.out.println("Bicycle Features:");
-        System.out.println("    Wheel Features:");
+
+        System.out.println("    Wheel1 Features:");
         System.out.println("        Tyre Features:");
         System.out.println("            Size: " + bicycle.getWheel1().getTyre().getThickness());
         System.out.println("        Rim Features:");
         System.out.println("            Size: " + bicycle.getWheel1().getRim().getSize());
+        System.out.println("        Diameter:");
+        System.out.println("            Value: " + bicycle.getWheel1().diameter());
+        System.out.println("        Circumference:");
+        System.out.println("            Value: " + bicycle.getWheel1().circumference());
+        
+        System.out.println("    Wheel2 Features:");
+        System.out.println("        Tyre Features:");
+        System.out.println("            Size: " + bicycle.getWheel2().getTyre().getThickness());
+        System.out.println("        Rim Features:");
+        System.out.println("            Size: " + bicycle.getWheel1().getRim().getSize());
+        System.out.println("        Diameter:");
+        System.out.println("            Value: " + bicycle.getWheel2().diameter());
+        System.out.println("        Circumference:");
+        System.out.println("            Value: " + bicycle.getWheel2().circumference());
+        
         System.out.println("    Gear Features:");
         System.out.println("        ChainRing:");
         System.out.println("            Size: " + bicycle.getGear().getChainRingSize());
