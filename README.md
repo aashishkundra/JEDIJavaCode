@@ -1,7 +1,7 @@
 File Name: Bicycle.java
 _____________________________________________________________________________________________________________________________
 IMPLEMENTATION: 
-> It implements the code of Bicycles having Gears. The code is implemented by making following design choices to trade of between efficient code and it being scalable in the future. 
+It implements the code of Bicycles having Gears. The code is implemented by making following design choices to trade of between efficient code and it being scalable in the future. 
 Classes:
 1. Bicycle
 2. Gear
