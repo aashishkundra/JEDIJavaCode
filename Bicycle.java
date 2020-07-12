@@ -28,6 +28,10 @@ class Gear {
     void modifyCogSize(double newCogSize) {
         this.cogSize = newCogSize;
     }
+
+    double ratio() {
+        return chainRing / cog;
+    }
 }
 
 class Rim {
@@ -86,6 +90,14 @@ class Wheel {
 
     void modifyRim(Rim newRim) {
         this.rim = newRim;
+    }
+
+    double diameter() {
+        return this.tyre.getSize() * 2 + this.rim.getSize();
+    }
+
+    double circumference() {
+        return Math.PI * diameter();
     }
 
 }
