@@ -3,6 +3,9 @@ package javaAssignment;
 import java.lang.*;
 import java.util.*;
 
+interface DiametricObjects {
+    double getDiameter();
+}
 
 class Gear {
     private double chainRingSize; 
@@ -33,24 +36,24 @@ class Gear {
         return chainRingSize / cogSize;
     }
 
-    double gearInches(Wheel wheel) {
-        return this.ratio() * wheel.diameter();
+    double gearInches(DiametricObjects object) {
+        return this.ratio() * object.getDiameter();
     }
 }
 
-class Rim {
-    private double size;
+class Rim implements DiametricObjects {
+    private double diameter;
 
-    Rim(double size) {
-        this.size = size;
+    Rim(double diameter) {
+        this.diameter = diameter;
     }
 
-    double getSize() {
-        return this.size;
+    public double getDiameter() {
+        return this.diameter;
     }
 
-    void modifySize(double newSize) {
-        this.size = newSize;
+    void modifySize(double newDiameter) {
+        this.diameter = newDiameter;
     }
 
 }
@@ -71,7 +74,7 @@ class Tyre {
     }
 }
 
-class Wheel {
+class Wheel implements DiametricObjects {
     private Tyre tyre;
     private Rim rim;
 
@@ -96,12 +99,12 @@ class Wheel {
         this.rim = newRim;
     }
 
-    double diameter() {
-        return this.tyre.getThickness() * 2 + this.rim.getSize();
+    public double getDiameter() {
+        return this.tyre.getThickness() * 2 + this.rim.getDiameter();
     }
 
     double circumference() {
-        return Math.PI * diameter();
+        return Math.PI * getDiameter();
     }
 
 }
@@ -169,9 +172,9 @@ class Bicycle {
         System.out.println("        Tyre Features:");
         System.out.println("            Size: " + bicycle.getWheel1().getTyre().getThickness());
         System.out.println("        Rim Features:");
-        System.out.println("            Size: " + bicycle.getWheel1().getRim().getSize());
+        System.out.println("            Size: " + bicycle.getWheel1().getRim().getDiameter());
         System.out.println("        Diameter:");
-        System.out.println("            Value: " + bicycle.getWheel1().diameter());
+        System.out.println("            Value: " + bicycle.getWheel1().getDiameter());
         System.out.println("        Circumference:");
         System.out.println("            Value: " + bicycle.getWheel1().circumference());
         
@@ -179,9 +182,9 @@ class Bicycle {
         System.out.println("        Tyre Features:");
         System.out.println("            Size: " + bicycle.getWheel2().getTyre().getThickness());
         System.out.println("        Rim Features:");
-        System.out.println("            Size: " + bicycle.getWheel1().getRim().getSize());
+        System.out.println("            Size: " + bicycle.getWheel1().getRim().getDiameter());
         System.out.println("        Diameter:");
-        System.out.println("            Value: " + bicycle.getWheel2().diameter());
+        System.out.println("            Value: " + bicycle.getWheel2().getDiameter());
         System.out.println("        Circumference:");
         System.out.println("            Value: " + bicycle.getWheel2().circumference());
         
@@ -190,6 +193,12 @@ class Bicycle {
         System.out.println("            Size: " + bicycle.getGear().getChainRingSize());
         System.out.println("        Cog:");
         System.out.println("            Size: " + bicycle.getGear().getCogSize());
+
+        System.out.println("-----------------------------------------------");
+        System.out.println("    Gear Ratio For the Wheel:");
+        System.out.println("            Value1: " + bicycle.getGear().gearInches(bicycle.getWheel1()));
+        System.out.println("            Value2: " + bicycle.getGear().gearInches(bicycle.getWheel2()));
+
     }
 }
 
