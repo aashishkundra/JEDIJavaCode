@@ -1,5 +1,5 @@
 File Name: Bicycle.java
-
+_____________________________________________________________________________________________________________________________
 IMPLEMENTATION: 
 > It implements the code of Bicycles having Gears. The code is implemented by making following design choices to trade of between efficient code and it being scalable in the future. 
 Classes:
@@ -21,3 +21,11 @@ are also added keeping in mind that they have some specific implementations and 
 Further Additions to be done:
 1. Add FrontTyre and Backtyre subclasses from Tyre class since the tyres can be classified as front and back based on the treads they have on them.
 2. Exception Handling.
+
+_____________________________________________________________________________________________________________________________
+COMPILE: javac Bicycle.java -d <dir-name> 
+Explanation: The .class file is stored in the dir named <dir-name>.
+
+RUN: java -cp ClassFiles <package-name>.Bicycle 
+Explanation: Part of package <package-name>.
+_____________________________________________________________________________________________________________________________
