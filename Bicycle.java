@@ -3,6 +3,11 @@ package javaAssignment;
 import java.lang.*;
 import java.util.*;
 
+/*
+javac Bicycle.java -d ClassFiles
+java -cp ClassFiles javaAssignment.Bicycle
+*/
+
 interface DiametricObjects {
     double getDiameter();
 }
@@ -126,14 +131,12 @@ class Wheel implements DiametricObjects {
 class Bicycle {
     private Wheel frontWheel;
     private Wheel backWheel;
-    private FrontGear frontGear;
-    private BackGear backGear;
+    private ArrayList<FrontGear> frontGears = new ArrayList<FrontGear>();
+    private ArrayList<BackGear> backGears = new ArrayList<BackGear>();
 
     Bicycle(Hashtable bicycleHash) {
         this.frontWheel = (Wheel)bicycleHash.get("frontWheel");
         this.backWheel = (Wheel)bicycleHash.get("backWheel");
-        this.frontGear  = (FrontGear)bicycleHash.get("frontGear"); 
-        this.backGear  = (BackGear)bicycleHash.get("backGear"); 
     }
 
     Wheel getfrontWheel() {
@@ -144,12 +147,12 @@ class Bicycle {
         return this.backWheel;
     }
 
-    FrontGear getFrontGear() {
-        return this.frontGear;
+    FrontGear getFrontGear(int index) {
+        return this.frontGears.get(index);
     }
 
-    BackGear getBackGear() {
-        return this.backGear;
+    BackGear getBackGear(int index) {
+        return this.backGears.get(index);
     }
 
     void modifyfrontWheel(Wheel newfrontWheel) {
@@ -161,12 +164,12 @@ class Bicycle {
         this.backWheel = newbackWheel;
     }
 
-    void modifyFrontGear(FrontGear newFrontGear) {
-        this.frontGear = newFrontGear;
+    void addFrontGear(FrontGear newFrontGear) {
+        this.frontGears.add(newFrontGear); 
     }
 
-    void modifyBackGear(BackGear newBackGear) {
-        this.backGear = newBackGear;
+    void addBackGear(BackGear newBackGear) {
+        this.backGears.add(newBackGear);
     }
 
     public static void main(String args[]) {
@@ -188,9 +191,9 @@ class Bicycle {
         Hashtable<String, Object> bicycleHash = new Hashtable<String, Object>();
         bicycleHash.put("frontWheel", frontWheel);
         bicycleHash.put("backWheel", backWheel);
-        bicycleHash.put("frontGear", frontGear);
-        bicycleHash.put("backGear", backGear);
         Bicycle bicycle = new Bicycle(bicycleHash);
+        bicycle.addFrontGear((FrontGear)frontGear);
+        bicycle.addBackGear((BackGear)backGear);
 
         System.out.println("Bicycle Features:");
 
@@ -217,20 +220,20 @@ class Bicycle {
         System.out.println("    Gear Features:");
         System.out.println("        Front Gear(s):");
         System.out.println("            ChainRing:");
-        System.out.println("                Size: " + bicycle.getFrontGear().getChainRingSize());
+        System.out.println("                Size: " + bicycle.getFrontGear(0).getChainRingSize());
         System.out.println("            Cog:");
-        System.out.println("                Size: " + bicycle.getFrontGear().getCogSize());
+        System.out.println("                Size: " + bicycle.getFrontGear(0).getCogSize());
 
         System.out.println("        Back Gear(s):");
         System.out.println("            ChainRing:");
-        System.out.println("                Size: " + bicycle.getBackGear().getChainRingSize());
+        System.out.println("                Size: " + bicycle.getBackGear(0).getChainRingSize());
         System.out.println("            Cog:");
-        System.out.println("                Size: " + bicycle.getBackGear().getCogSize());
+        System.out.println("                Size: " + bicycle.getBackGear(0).getCogSize());
 
         System.out.println("-----------------------------------------------");
         System.out.println("    Gear Ratio For the Wheel:");
-        System.out.println("            Value1: " + bicycle.getFrontGear().gearInches(bicycle.getfrontWheel()));
-        System.out.println("            Value2: " + bicycle.getFrontGear().gearInches(bicycle.getbackWheel()));
+        System.out.println("            Value1: " + bicycle.getFrontGear(0).gearInches(bicycle.getfrontWheel()));
+        System.out.println("            Value2: " + bicycle.getFrontGear(0).gearInches(bicycle.getbackWheel()));
 
     }
 }
